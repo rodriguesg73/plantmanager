@@ -40,6 +40,7 @@ export default StyleSheet.create({
 
   footer: {
     width: '100%',
-    paddingHorizontal: 60
+    paddingHorizontal: 60,
+    marginTop: 20
   },
 });

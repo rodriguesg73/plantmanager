@@ -4,12 +4,18 @@ import {
   Text,
   View
 } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { Button } from '../../components/Button/Button';
 
 import styles from './styles';
 
 export function Confirmation() {
+  const navigation = useNavigation();
+
+  function handleHomePage() {
+    navigation.navigate('PlantSelect')
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -24,7 +30,10 @@ export function Confirmation() {
           plantinhas com muito cuidado
         </Text>
         <View style={styles.footer}>
-          <Button />
+          <Button
+            title="Começar"
+            onPress={handleHomePage}
+          />
         </View>
       </View>
     </SafeAreaView>
