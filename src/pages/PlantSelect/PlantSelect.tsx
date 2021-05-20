@@ -1,19 +1,21 @@
 import React from 'react';
 import {
   View,
+  SafeAreaView,
   Text
 } from 'react-native';
+
+import { Header } from '../../components/Header/Header';
 
 import styles from './styles';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function PlantSelect() {
   return (
-    <SafeAreaView>
+    <SafeAreaView >
       <View style={styles.container}>
-        <Text>Selecionar Planta</Text>
+        <Header />
       </View>
     </SafeAreaView>
   )
