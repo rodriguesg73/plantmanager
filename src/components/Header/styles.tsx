@@ -15,15 +15,21 @@ export default StyleSheet.create({
   },
 
   greeting: {
-
+    fontSize: 32,
+    color: colors.heading,
+    fontFamily: fonts.text
   },
 
   userName: {
-
+    fontSize: 32,
+    fontFamily: fonts.heading,
+    color: colors.heading,
+    lineHeight: 40
   },
 
   userImg: {
-    width: '50%',
-    height: Dimensions.get('window').width * 0.7
+    width: 80,
+    height: 80,
+    borderRadius: 80,
   }
 })
