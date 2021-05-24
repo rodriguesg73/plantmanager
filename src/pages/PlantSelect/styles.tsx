@@ -30,6 +30,14 @@ export default StyleSheet.create({
 
   buttonContainer: {
     paddingHorizontal: 10,
-    flexDirection: "row",
+    flexDirection: 'row',
+  },
+
+  enviromentList: {
+    height: 40,
+    justifyContent: 'center',
+    paddingBottom: 5,
+    marginLeft: 15,
+    marginVertical: 32
   }
 });

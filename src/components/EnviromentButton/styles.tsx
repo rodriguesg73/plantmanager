@@ -7,21 +7,24 @@ export default StyleSheet.create({
   button: {
     backgroundColor: colors.shape,
     height: 40,
-    width: 76,
+    width: 80,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,
-    marginHorizontal: 5,
-    marginVertical: 10
+    marginRight: 5
   },
 
   buttonActive: {
-    fontFamily: fonts.heading,
-    color: colors.green
+    backgroundColor: colors.green_light
   },
 
   text: {
     color: colors.heading,
     fontFamily: fonts.text
+  },
+
+  textActive: {
+    fontFamily: fonts.heading,
+    color: colors.green_dark
   }
 })

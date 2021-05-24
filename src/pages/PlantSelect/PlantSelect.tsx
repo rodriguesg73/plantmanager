@@ -3,6 +3,7 @@ import {
   View,
   SafeAreaView,
   Text,
+  FlatList
 } from 'react-native';
 
 import { Header } from '../../components/Header/Header';
@@ -23,8 +24,16 @@ export function PlantSelect() {
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <EnviromentButton title="Cozinha" />
-        <EnviromentButton title="Quarto" />
+        <FlatList
+          data={[1, 2, 3, 4, 5]}
+          renderItem={({ item }) => (
+            <EnviromentButton title="Cozinha" />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.enviromentList}
+        />
+
       </View>
     </View>
   )
