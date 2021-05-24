@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View,
   SafeAreaView,
-  Text
+  Text,
 } from 'react-native';
 
 import { Header } from '../../components/Header/Header';
@@ -22,8 +22,10 @@ export function PlantSelect() {
           você quer colocar sua planta?
         </Text>
       </View>
-
-      <EnviromentButton title="Cozinha" />
+      <View style={styles.buttonContainer}>
+        <EnviromentButton title="Cozinha" />
+        <EnviromentButton title="Quarto" />
+      </View>
     </View>
   )
 }

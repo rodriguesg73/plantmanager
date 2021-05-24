@@ -10,7 +10,9 @@ export default StyleSheet.create({
     width: 76,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 12
+    borderRadius: 12,
+    marginHorizontal: 5,
+    marginVertical: 10
   },
 
   buttonActive: {

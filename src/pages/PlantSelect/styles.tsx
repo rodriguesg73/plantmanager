@@ -26,5 +26,10 @@ export default StyleSheet.create({
     fontFamily: fonts.text,
     lineHeight: 20,
     color: colors.heading,
+  },
+
+  buttonContainer: {
+    paddingHorizontal: 10,
+    flexDirection: "row",
   }
 });
