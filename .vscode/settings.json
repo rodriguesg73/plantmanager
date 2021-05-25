@@ -4,5 +4,9 @@
     "enviroment",
     "plantinhas",
     "props"
+  ],
+  "cSpell.ignoreWords": [
+    "enviroments",
+    "plants"
   ]
 }
