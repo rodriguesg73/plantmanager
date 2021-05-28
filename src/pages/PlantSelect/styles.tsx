@@ -28,7 +28,7 @@ export default StyleSheet.create({
     color: colors.heading,
   },
 
-  buttonContainer: {
+  environmentButtonContainer: {
     paddingHorizontal: 10,
     flexDirection: 'row',
   },
@@ -37,7 +37,17 @@ export default StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     paddingBottom: 5,
-    marginLeft: 15,
+    marginLeft: 25,
     marginVertical: 32
+  },
+
+  plantButtonContainer: {
+     flex: 1,
+     paddingHorizontal: 32,
+     justifyContent: 'center'
+  },
+
+  plantList: {
+
   }
 });
