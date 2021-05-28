@@ -29,7 +29,7 @@ interface PlantsProps {
   environments: [string];
   frequency: {
     times: number;
-    repeat_every: string; 
+    repeat_every: string;
   }
 }
 
@@ -42,14 +42,13 @@ export function PlantSelect() {
 
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment);
 
     if (environment == 'all')
       return setFilteredPlants(plants);
-    
+
     const filtered = plants.filter(plant =>
       plant.environments.includes(environment)
     );
@@ -58,24 +57,24 @@ export function PlantSelect() {
   }
 
   async function fetchPlants() {
-    try {  
+    try {
       const { data } = await api
-        .get(`http://192.168.0.105:3333/plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
+        .get(`http://192.168.2.184:3333/plants?_sort=name&_order=asc&_page=${page}&_limit=8`);
 
-      if(!data)
+      if (!data)
         return setLoading(true);
-      
-      if(page > 1){
+
+      if (page > 1) {
         setPlants(oldValue => [...oldValue, ...data]);
         setFilteredPlants(oldValue => [...oldValue, ...data]);
-      }else {
+      } else {
         setPlants(data);
         setFilteredPlants(data);
       }
 
       setLoading(false);
       setLoadingMore(false)
-  
+
     } catch {
       alert('An internal error ocurred');
     }
@@ -84,7 +83,7 @@ export function PlantSelect() {
   function handleLoadingMore(distance: number) {
     if (distance < 1)
       return;
-      
+
     setLoadingMore(true);
     setPage(oldValue => oldValue + 1);
     fetchPlants();
@@ -92,32 +91,32 @@ export function PlantSelect() {
 
   useEffect(() => {
     async function fetchEnvironment() {
-      try {  
+      try {
         const { data } = await api
-        .get('http://192.168.0.105:3333/plants_environments?_sort=title&_order=asc');
+          .get('http://192.168.2.184:3333/plants_environments?_sort=title&_order=asc');
 
-          setEnvironments([
-            {
-              key: 'all',
-              title: 'Todos'
-            },
-            ...data
-          ]);
-        
-    
+        setEnvironments([
+          {
+            key: 'all',
+            title: 'Todos'
+          },
+          ...data
+        ]);
+
+
       } catch {
         alert('An internal error ocurred');
       }
     }
-    
+
     fetchEnvironment();
   }, []);
 
   useEffect(() => {
     fetchPlants();
-  }, []);  
+  }, []);
 
-  if(loading)
+  if (loading)
     return <Loading />
 
   return (
@@ -131,12 +130,13 @@ export function PlantSelect() {
           você quer colocar sua planta?
         </Text>
       </View>
-      
+
       <View style={styles.environmentButtonContainer}>
         <FlatList
           data={environments}
+          keyExtractor={(item) => String(item.key)}
           renderItem={({ item }) => (
-            <EnviromentButton 
+            <EnviromentButton
               title={item.title}
               active={item.key === environmentSelected}
               onPress={() => handleEnvironmentSelected(item.key)}
@@ -149,8 +149,9 @@ export function PlantSelect() {
       </View>
 
       <View style={styles.plantButtonContainer}>
-        <FlatList 
+        <FlatList
           data={filteredPlants}
+          keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
             <PlantCardPrimary data={item} />
           )}
@@ -158,13 +159,13 @@ export function PlantSelect() {
           contentContainerStyle={styles.plantList}
           numColumns={2}
           onEndReachedThreshold={0.1}
-          onEndReached={({ distanceFromEnd }) => 
-            handleLoadingMore(distanceFromEnd)  
+          onEndReached={({ distanceFromEnd }) =>
+            handleLoadingMore(distanceFromEnd)
           }
           ListFooterComponent={
             loadingMore
-            ? <ActivityIndicator color={colors.green} />
-            : <></>
+              ? <ActivityIndicator color={colors.green} />
+              : <></>
           }
         />
       </View>

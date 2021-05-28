@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
 
   environmentButtonContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     flexDirection: 'row',
   },
 
@@ -37,14 +37,14 @@ export default StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     paddingBottom: 5,
-    marginLeft: 25,
+    marginLeft: 30,
     marginVertical: 32
   },
 
   plantButtonContainer: {
-     flex: 1,
-     paddingHorizontal: 32,
-     justifyContent: 'center'
+    flex: 1,
+    paddingHorizontal: 32,
+    justifyContent: 'center'
   },
 
   plantList: {
