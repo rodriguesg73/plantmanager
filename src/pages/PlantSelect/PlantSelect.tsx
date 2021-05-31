@@ -3,13 +3,17 @@ import {
   View,
   Text,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { EnviromentButton } from '../../components/EnviromentButton/EnviromentButton';
 import { Header } from '../../components/Header/Header';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary/PlantCardPrimary';
 import { Loading } from '../../components/Load/Load';
+import { Button } from '../../components/Button/Button';
+import { PlantsProps } from '../../libs/storage';
 import api from '../../services/api';
 
 import styles from './styles';
@@ -19,27 +23,13 @@ interface EnvironmentData {
   key: string;
   title: string;
 }
-
-interface PlantsProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  }
-}
-
 export function PlantSelect() {
+  const navigation = useNavigation();
   const [environments, setEnvironments] = useState<EnvironmentData[]>([]);
   const [plants, setPlants] = useState<PlantsProps[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
   const [loading, setLoading] = useState(true);
-
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
 
@@ -116,8 +106,9 @@ export function PlantSelect() {
     fetchPlants();
   }, []);
 
-  if (loading)
-    return <Loading />
+  function handlePlantDetailsPage(plant: PlantsProps) {
+    navigation.navigate('PlantDetails', { plant });
+  }
 
   return (
     <View style={styles.container}>
@@ -153,7 +144,10 @@ export function PlantSelect() {
           data={filteredPlants}
           keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
-            <PlantCardPrimary data={item} />
+            <PlantCardPrimary
+              data={item}
+              onPress={() => handlePlantDetailsPage(item)}
+            />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.plantList}

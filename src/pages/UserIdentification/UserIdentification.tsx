@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Swal from 'sweetalert2';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 import { Button } from '../../components/Button/Button'
 import colors from '../../styles/colors';
@@ -40,11 +42,14 @@ export function UserIdentification() {
 
   async function handleConfirmationPage() {
     if (!name)
-      return Alert.alert('Alerta!', 'Me diz como você se chama 🤔',);
+      return Alert.alert('AVISO!', 'Me diz como você se chama 🤔');
 
-    await AsyncStorage.setItem('@plantmanager:user', name);
-
-    navigation.navigate('Confirmation')
+    try {
+      await AsyncStorage.setItem('@plantmanager:user', name);
+      navigation.navigate('Confirmation')
+    } catch {
+      Alert.alert('Não foi possível salvar o seu nome 🤔');
+    }
   }
 
   return (
