@@ -13,7 +13,7 @@ import { useNavigation, useRoute } from '@react-navigation/core';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 
 import { Button } from '../../components/Button/Button';
-import { loadPlant, PlantsProps, savePlant } from '../../libs/storage';
+import { PlantsProps, savePlant } from '../../libs/storage';
 import wateringTipImg from '../../assets/waterdrop.png'
 
 import styles from './styles';
@@ -29,6 +29,7 @@ export function PlantDetails() {
 
   const route = useRoute();
   const { plant } = route.params as Params;
+  const navigation = useNavigation();
 
   function handleChangeTime(event: Event, dateTime: Date | undefined) {
     if (Platform.OS === 'android') {
@@ -49,6 +50,14 @@ export function PlantDetails() {
       await savePlant({
         ...plant,
         dateTimeNotification: selectedDateTime
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
+        buttonTitle: 'Muito obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants'
       });
     } catch (error) {
       Alert.alert('Não foi possível salvar. 😥')
